@@ -1,2 +1,3 @@
-include ':app'
+include ':data'
+include ':android-ui'
 rootProject.name = "GitHub Demo App"

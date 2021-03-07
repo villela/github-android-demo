@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/android-ui" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/presentation" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

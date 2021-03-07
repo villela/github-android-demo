@@ -1,16 +1,18 @@
 package com.matheusvillela.githubdemoapp.data.di
 
-import com.matheusvillela.githubdemoapp.data.Api
-import com.matheusvillela.githubdemoapp.data.GitHubRepository
-import com.matheusvillela.githubdemoapp.data.GitHubRepositoryImpl
+import com.matheusvillela.githubdemoapp.data.*
 import retrofit2.Converter
 import toothpick.config.Module
 
-class DataModule : Module() {
+open class DataModule : Module() {
     init {
-        bind(Api::class.java).toProvider(ApiProvider::class.java).providesSingleton()
+        setup()
+    }
+
+    private fun setup() {
+        bind(Api::class.java).toProvider(ApiProvider::class.java)
         bind(Converter.Factory::class.java).toProvider(ConverterFactoryProvider::class.java)
-            .providesSingleton()
-        bind(GitHubRepository::class.java).to(GitHubRepositoryImpl::class.java)
+        bind(GitHubRepoRepository::class.java).to(GitHubRepoRepositoryImpl::class.java)
+        bind(GitHubUserRepository::class.java).to(GitHubUserRepositoryImpl::class.java)
     }
 }

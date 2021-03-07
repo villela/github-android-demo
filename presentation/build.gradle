@@ -1,0 +1,18 @@
+plugins {
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
+
+dependencies {
+    implementation project(":data")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
+    implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:3.1.0'
+    kapt  'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
+
+    testImplementation(platform('org.junit:junit-bom:5.7.0'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation "io.mockk:mockk:1.10.6"
+}

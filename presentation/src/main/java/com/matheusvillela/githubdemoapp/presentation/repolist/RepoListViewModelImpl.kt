@@ -16,30 +16,43 @@ internal class RepoListViewModelImpl(
     private val repoMapper: GitHubRepoMapper
 ) : RepoListViewModel {
     override val state: BehaviorSubject<RepoListState> =
-        BehaviorSubject.createDefault(RepoListState.Loading)
+        BehaviorSubject.createDefault(RepoListState.Loading(""))
 
     private val disposables = CompositeDisposable()
 
     init {
         onClearedSubscriber.subscribe { disposables.dispose() }
-        searchReposByName("")
+        searchRepos("")
     }
 
-    override fun searchReposByName(repoName: String) {
-        state.onNext(RepoListState.Loading)
-        if (repoName.isBlank()) {
+    override fun searchRepos(searchStr: String) {
+        val currentState = state.value
+        if (currentState is RepoListState.Success && currentState.searchedValue == searchStr) return
+
+        state.onNext(RepoListState.Loading(searchStr))
+        if (searchStr.isBlank()) {
             repoRepository.getGitHubRepos()
                 .subscribeOn(Schedulers.io())
                 .subscribe({ dto ->
-                    state.onNext(RepoListState.Success(dto.map(repoMapper::toGitHubRepo)))
-                }, { state.onNext(RepoListState.Error) })
+                    state.onNext(
+                        RepoListState.Success(
+                            dto.map(repoMapper::toGitHubRepo),
+                            searchStr
+                        )
+                    )
+                }, { state.onNext(RepoListState.Error(it, searchStr)) })
                 .addTo(disposables)
         } else {
-            repoRepository.searchGitHubReposByName(repoName)
+            repoRepository.searchGitHubReposByName(searchStr)
                 .subscribeOn(Schedulers.io())
                 .subscribe({ dto ->
-                    state.onNext(RepoListState.Success(dto.items.map(repoMapper::toGitHubRepo)))
-                }, { state.onNext(RepoListState.Error) })
+                    state.onNext(
+                        RepoListState.Success(
+                            dto.items.map(repoMapper::toGitHubRepo),
+                            searchStr
+                        )
+                    )
+                }, { state.onNext(RepoListState.Error(it, searchStr)) })
                 .addTo(disposables)
         }
     }

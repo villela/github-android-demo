@@ -31,7 +31,7 @@ class RepoInfoViewModelTest {
         val repo = mockk<GitHubUserRepository>()
         every { repo.getUser(*any()) } returns Single.create { emitter ->
             emitter.onSuccess(
-                GitHubUserDto("userName")
+                GitHubUserDto("userName", "https://test")
             )
         }
         val mapper = GitHubUserMapper()
@@ -58,7 +58,7 @@ class RepoInfoViewModelTest {
     @Test
     fun test_user_info_is_correct() {
         val state = viewModel.state.blockingFirst()
-        assert(state is RepoInfoState.Success && state.user.name == "userName")
+        assert(state is RepoInfoState.Success && state.user.name == "userName" && state.user.avatarUrl == "https://test")
     }
 
 }

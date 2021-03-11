@@ -13,12 +13,13 @@ class UserMapperTest {
     @BeforeEach
     fun setup() {
         mapper = GitHubUserMapper()
-        dto = GitHubUserDto("name")
+        dto = GitHubUserDto("name", "https://test")
     }
 
     @Test
     fun test_name_maps_correctly() {
         val result = mapper.toUser(dto)
         assert(result.name == "name")
+        assert(result.avatarUrl == "https://test")
     }
 }

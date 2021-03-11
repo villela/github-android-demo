@@ -7,6 +7,6 @@ import toothpick.InjectConstructor
 @InjectConstructor
 internal class GitHubUserMapper {
     fun toUser(userDto: GitHubUserDto): GitHubUser {
-        return GitHubUser(userDto.name)
+        return GitHubUser(userDto.name, userDto.avatarUrl)
     }
 }

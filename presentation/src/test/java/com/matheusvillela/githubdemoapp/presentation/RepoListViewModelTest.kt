@@ -63,7 +63,7 @@ class RepoListViewModelTest {
 
     @Test
     fun searched_list_should_return_searched_item_after_one_second() {
-        viewModel.searchReposByName("bla")
+        viewModel.searchRepos("bla")
         val state = viewModel.state.blockingFirst()
         assert(state is RepoListState.Success && state.repos.size == 1 && state.repos[0].name == "searchName" && state.repos[0].description == "searchDesc" && state.repos[0].owner.login == "searchLogin")
     }

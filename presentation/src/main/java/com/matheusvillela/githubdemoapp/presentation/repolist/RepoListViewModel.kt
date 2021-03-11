@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Observable
 interface RepoListViewModel {
     val state: Observable<RepoListState>
 
-    fun searchReposByName(repoName: String)
+    fun searchRepos(searchStr: String)
 }

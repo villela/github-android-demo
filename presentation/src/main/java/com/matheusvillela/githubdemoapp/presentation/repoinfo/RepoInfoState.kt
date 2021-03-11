@@ -8,5 +8,5 @@ sealed class RepoInfoState(
 ) {
     class Loading(repo: GitHubRepo) : RepoInfoState(repo)
     class Success(repo: GitHubRepo, val user: GitHubUser) : RepoInfoState(repo)
-    class Error(repo: GitHubRepo) : RepoInfoState(repo)
+    class Error(repo: GitHubRepo, val throwable: Throwable) : RepoInfoState(repo)
 }

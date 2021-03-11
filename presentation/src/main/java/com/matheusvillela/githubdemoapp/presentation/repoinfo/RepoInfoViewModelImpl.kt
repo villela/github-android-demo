@@ -39,7 +39,7 @@ internal class RepoInfoViewModelImpl(
             .subscribeOn(Schedulers.io())
             .subscribe({ dto ->
                 state.onNext(RepoInfoState.Success(repo, userMapper.toUser(dto)))
-            }, { state.onNext(RepoInfoState.Error(repo)) })
+            }, { state.onNext(RepoInfoState.Error(repo, it)) })
             .addTo(disposables)
     }
 }

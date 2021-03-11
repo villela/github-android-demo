@@ -1,12 +1,8 @@
-#GitHuB Demo App by Matheus Villela
+# GitHuB Demo App by Matheus Villela
 
-###Modules
-
+### Modules
 ```flow
-au=>operation: android-ui
-pr=>operation: presentation
-da=>operation: data
-au->pr->da
+android-ui -> presentation -> data
 ```
 
 **android-ui**: is the only module that depends on android. In the module there are all the DI entrypoints and config, and the android components - Fragments and a main Activity

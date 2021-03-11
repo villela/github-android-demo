@@ -1,3 +1,9 @@
 package com.matheusvillela.githubdemoapp.data.dto
 
-data class GitHubUserDto(val name: String)
+import com.squareup.moshi.Json
+
+data class GitHubUserDto(
+    val name: String?,
+    @Json(name = "avatar_url")
+    val avatarUrl: String
+)

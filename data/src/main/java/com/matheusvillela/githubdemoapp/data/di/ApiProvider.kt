@@ -1,16 +1,17 @@
 package com.matheusvillela.githubdemoapp.data.di
 
 import com.matheusvillela.githubdemoapp.data.Api
-import com.matheusvillela.githubdemoapp.data.Environment
+import com.matheusvillela.githubdemoapp.data.DataEnvironment
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
-import javax.inject.Inject
+import toothpick.InjectConstructor
 import javax.inject.Provider
 
-internal class ApiProvider @Inject constructor(
-    private val environment: Environment,
+@InjectConstructor
+internal class ApiProvider(
+    private val environment: DataEnvironment,
     private val client: OkHttpClient,
     private val converterFactory: Converter.Factory
 ) : Provider<Api> {

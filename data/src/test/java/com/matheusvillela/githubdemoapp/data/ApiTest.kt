@@ -5,6 +5,7 @@ import com.matheusvillela.githubdemoapp.data.di.ConverterFactoryProvider
 import okhttp3.OkHttpClient
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.io.File
 import java.util.*
 
 class ApiTest {
@@ -14,8 +15,11 @@ class ApiTest {
     @BeforeEach
     fun setup() {
         val okHttpClient = OkHttpClient.Builder().build()
-        val env = object : Environment {
+        val env = object : DataEnvironment {
             override val gitHubBaseUrl = "https://api.github.com/"
+            override val gitHubToken = ""
+            override val cacheDir = File("")
+            override val isDebug = true
         }
         api = ApiProvider(env, okHttpClient, ConverterFactoryProvider().get()).get()
     }
